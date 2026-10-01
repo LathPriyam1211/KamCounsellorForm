@@ -972,15 +972,19 @@
       submitBtn.disabled = true;
       btnText.textContent = "Submitting...";
 
-      const payload = {
-        existingPartner: isExisting ? 'Yes' : 'No',
-        businessName: business.name,
-        businessPhone: business.phone,
-        businessEmail: business.email,
-        studentName: student.name,
-        studentPhone: student.phone,
-        studentEmail: student.email
-      };
+   const params = new URLSearchParams(window.location.search);
+   const payload = {
+     existingPartner: isExisting ? 'Yes' : 'No',
+     businessName: business.name,
+     businessPhone: business.phone,
+     businessEmail: business.email,
+     studentName: student.name,
+     studentPhone: student.phone,
+     studentEmail: student.email,
+     utmSource: params.get('utm_source') || '',
+     utmMedium: params.get('utm_medium') || '',
+     utmCampaign: params.get('utm_campaign') || ''
+   };
 
       try {
         await fetch(APPS_SCRIPT_URL, {
